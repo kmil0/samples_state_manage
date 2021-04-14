@@ -1,33 +1,42 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:state_management/bloc_and_provider/samples/counter_services.dart';
 import 'package:state_management/bloc_and_provider/samples/dialog_utils.dart';
+import 'package:state_management/bloc_and_provider/samples/none/main_none_bloc.dart';
 
 class MainNone extends StatelessWidget {
-  const MainNone({Key key}) : super(key: key);
+  final service = CounterService();
 
   @override
   Widget build(BuildContext context) {
-    return MyHomePage(title: 'No packages');
+    return MyHomePage(title: 'No packages', service: service);
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key key, this.title, this.service}) : super(key: key);
   final String title;
+  final CounterRepository service;
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  MainNoneBLoC bloc;
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-    if (_counter > 0 && _counter % 5 == 0) {
+  void _incrementCounter() async {
+    await bloc.increment();
+    if (bloc.counter > 0 && bloc.counter % 5 == 0) {
       showHelloDialog(context, 'None');
     }
+  }
+
+  @override
+  void initState() {
+    bloc = MainNoneBLoC(widget.service);
+    super.initState();
   }
 
   @override
@@ -36,9 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
         appBar: AppBar(
           title: Text(widget.title),
         ),
-        body: _CounterBody(
-          counter: _counter,
-        ),
+        body: _CounterBody(bloc: bloc),
         floatingActionButton: _CounterButton(
           onTap: _incrementCounter,
         ) // This trailing comma makes auto-formatting nicer for build methods.
@@ -47,8 +54,8 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 class _CounterBody extends StatelessWidget {
-  const _CounterBody({Key key, this.counter}) : super(key: key);
-  final int counter;
+  const _CounterBody({Key key, this.bloc}) : super(key: key);
+  final MainNoneBLoC bloc;
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +66,7 @@ class _CounterBody extends StatelessWidget {
           Text(
             'You have pushed the button this many times:',
           ),
-          _CounterText(counter: counter),
+          _CounterText(bloc: bloc),
         ],
       ),
     );
@@ -67,14 +74,19 @@ class _CounterBody extends StatelessWidget {
 }
 
 class _CounterText extends StatelessWidget {
-  const _CounterText({Key key, this.counter}) : super(key: key);
-  final int counter;
+  const _CounterText({Key key, this.bloc}) : super(key: key);
+  final MainNoneBLoC bloc;
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      '$counter',
-      style: Theme.of(context).textTheme.headline4,
+    return AnimatedBuilder(
+      animation: bloc,
+      builder: (context, _) {
+        return Text(
+          '${bloc.counter}',
+          style: Theme.of(context).textTheme.headline4,
+        );
+      },
     );
   }
 }
