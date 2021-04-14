@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:state_management/bloc_and_provider/samples/flutter_bloc/main_flutter_bloc.dart';
 import 'package:state_management/bloc_and_provider/samples/none/main_none.dart';
 import 'package:state_management/bloc_and_provider/samples/provider/main_provider.dart';

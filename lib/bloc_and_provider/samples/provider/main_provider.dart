@@ -30,7 +30,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _listenCounter() {
     if (bloc.counter > 0 && bloc.counter % 5 == 0) {
-      showHelloDialog(context, 'None');
+      showHelloDialog(context, 'Provider');
     }
   }
 
