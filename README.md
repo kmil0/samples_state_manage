@@ -1,6 +1,8 @@
 # state_management flutter
 
-A new Flutter project.
+A new Flutter project state management BLoC - Provider 
+
+by Diegoveloper
 
 ## Getting Started
 
