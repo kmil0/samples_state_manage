@@ -55,6 +55,7 @@ class MyHomePage extends StatelessWidget {
                 ),
                 ElevatedButton(
                   onPressed: () {
+                    _openPage(context, MainProvider());
                     //   final page = SampleProviderNotifier();
                     //   _openPage(
                     //     context,
