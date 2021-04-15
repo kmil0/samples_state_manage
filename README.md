@@ -1,6 +1,4 @@
 # state_management flutter 🌓
-# QRCodeSample
-An easy application for create and scan QR code on iOS using Xamarin.iOS
 Project state management BLoC- Flutter BLoC - Provider 
 
 <img align='right' src='https://media.giphy.com/media/bcKmIWkUMCjVm/giphy.gif' width='200"'>
