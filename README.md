@@ -2,6 +2,9 @@
 
 Project state management BLoC- Flutter BLoC - Provider 
 
+<img align='right' src='https://media.giphy.com/media/bcKmIWkUMCjVm/giphy.gif' width='200"'>
+
+
 by Diegoveloper
 
 ## Getting Started
